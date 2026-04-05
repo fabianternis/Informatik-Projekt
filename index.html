@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +7,25 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-logo">
-            JS
-        </div>
+        <div class="nav-logo">JS</div>
         <div class="nav-links">
-
+            <a href="#hero">Home</a>
+            <a href="#functions">Funktionen</a>
+            <a href="#tutorials">Tutorials</a>
         </div>
     </nav>
 
     <section id="hero">
         <h1>JavaScript</h1>
         <h3>Interaktivität für das Web</h3>
-        <a href="#funktionen" class="cta-primary">Funktionen</a>
-        <a href="#tutorials" class="cta-secondary">Tutorials</a>
+        <div class="cta-container">
+            <a href="#funktionen" class="cta-primary">Funktionen</a>
+            <a href="#tutorials" class="cta-secondary">Tutorials</a>
+        </div>
     </section>
 
     <section id="functions">
+        <h2>Wichtige/Häufige Funktionen</h2>
         <table>
             <thead>
                 <tr>
@@ -31,41 +34,47 @@
                     <th>Demo</th>
                 </tr>
             </thead>
-            <tr>
-                <td><code>alert('string')</code></td>
-                <td>Zeigt eine Nachricht an</td>
-                <td><button onclick="alert('Hallo!')">Test</button></td>
-            </tr>
-            <tr>
-                <td><code>confirm('string')</code></td>
-                <td>Fragt nach einer Bestätigung (Ok/Abbrechen)</td>
-                <td><button onclick="confirm('Bist du sicher?')">Test</button></td>
-            </tr>
-            <tr>
-                <td><code>prompt('string')</code></td>
-                <td>Fragt nach einer Benutzereingabe</td>
-                <td><button onclick="prompt('Wie heißt du?')">Test</button></td>
-            </tr>
-            <tr>
-                <td><code>console.log('string')</code></td>
-                <td>Schreibt Text in die Browser-Konsole (F12)</td>
-                <td><button onclick="console.log('Log-Eintrag erstellt')">Test</button></td>
-            </tr>
-            <tr>
-                <td><code>print()</code></td>
-                <td>Öffnet den Druckdialog der Seite</td>
-                <td><button onclick="window.print()">Test</button></td>
-            </tr>
-            <tr>
-                <td><code>location.reload()</code></td>
-                <td>Lädt die aktuelle Seite neu</td>
-                <td><button onclick="location.reload()">Test</button></td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td><code>alert()</code></td>
+                    <td>Zeigt ein einfaches Informationsfenster an.</td>
+                    <td><button onclick="alert('Hallo Welt!')">Test</button></td>
+                </tr>
+                <tr>
+                    <td><code>confirm()</code></td>
+                    <td>Fragt Ja/Nein ab und gibt <code>true</code> oder <code>false</code> zurück.</td>
+                    <td><button onclick="confirm('Bist du bereit?')">Test</button></td>
+                </tr>
+                <tr>
+                    <td><code>prompt()</code></td>
+                    <td>Öffnet ein Eingabefeld für den Nutzer.</td>
+                    <td><button onclick="prompt('Dein Name:')">Test</button></td>
+                </tr>
+                <tr>
+                    <td><code>console.log()</code></td>
+                    <td>Gibt Daten in der Konsole aus. <br><small>(Auch: <code>.warn()</code>, <code>.error()</code>)</small></td>
+                    <td><button onclick="console.log('Log-Eintrag!'); console.warn('Warnung!'); console.error('Fehler!')">Test</button></td>
+                </tr>
+                <tr>
+                    <td><code>window.print()</code></td>
+                    <td>Druckt das aktuelle Dokument.</td>
+                    <td><button onclick="window.print()">Test</button></td>
+                </tr>
+                <tr>
+                    <td><code>location.reload()</code></td>
+                    <td>Aktualisiert die Seite im Browser.</td>
+                    <td><button onclick="location.reload()">Test</button></td>
+                </tr>
+            </tbody>
         </table>
     </section>
 
-    <section id="tutorials">
+    <section id="coole-features">
+        <h2>Coole Features</h2>
+    </section>
 
+    <section id="tutorials">
+        <h2>Tutorials</h2>
     </section>
 
 

@@ -1,6 +1,6 @@
 :root {
     --js-black: #000000;
-    --js-yellow: #f7df1e; /* Das offizielle JS-Gelb */
+    --js-yellow: #f7df1e;
     --bg-dark: #1e1e1e;
     --text-light: #ffffff;
 }
@@ -13,7 +13,6 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Navigation */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -34,7 +33,22 @@ body {
     border-radius: 4px;
 }
 
-/* Hero Section */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--js-yellow);
+}
+
 #hero {
     height: 60vh;
     display: flex;
@@ -70,11 +84,24 @@ body {
     color: var(--js-yellow);
 }
 
-/* Tabelle Styling */
+.cta-container {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
 #functions {
-    padding: 50px 20px;
-    max-width: 900px;
+    padding: 80px 20px;
+    max-width: 1000px;
     margin: 0 auto;
+}
+
+#functions h2 {
+    text-align: center;
+    color: var(--js-yellow);
+    margin-bottom: 40px;
+    font-size: 2rem;
 }
 
 table {
@@ -103,6 +130,13 @@ code {
     color: #f78c6c;
 }
 
+small {
+    display: block;
+    margin-top: 5px;
+    color: #888;
+    font-style: italic;
+}
+
 button {
     background-color: #444;
     color: white;
@@ -116,4 +150,19 @@ button {
 button:hover {
     background-color: var(--js-yellow);
     color: var(--js-black);
+}
+
+@media (max-width: 600px) {
+    .cta-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 10px 5px;
+    }
 }
