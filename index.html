@@ -16,18 +16,50 @@
     </nav>
 
     <section id="hero">
-        JavaScript
+        <h1>JavaScript</h1>
+        <h3>Interaktivität für das Web</h3>
+        <a href="#funktionen" class="cta-primary">Funktionen</a>
+        <a href="#tutorials" class="cta-secondary">Tutorials</a>
     </section>
 
     <section id="functions">
         <table>
+            <thead>
+                <tr>
+                    <th>Funktion</th>
+                    <th>Beschreibung</th>
+                    <th>Demo</th>
+                </tr>
+            </thead>
             <tr>
                 <td><code>alert('string')</code></td>
-                <td><button onclick="alert('string')">Test</button></td>
+                <td>Zeigt eine Nachricht an</td>
+                <td><button onclick="alert('Hallo!')">Test</button></td>
             </tr>
             <tr>
                 <td><code>confirm('string')</code></td>
-                <td><button onclick="confirm('string')">Test</button></td>
+                <td>Fragt nach einer Bestätigung (Ok/Abbrechen)</td>
+                <td><button onclick="confirm('Bist du sicher?')">Test</button></td>
+            </tr>
+            <tr>
+                <td><code>prompt('string')</code></td>
+                <td>Fragt nach einer Benutzereingabe</td>
+                <td><button onclick="prompt('Wie heißt du?')">Test</button></td>
+            </tr>
+            <tr>
+                <td><code>console.log('string')</code></td>
+                <td>Schreibt Text in die Browser-Konsole (F12)</td>
+                <td><button onclick="console.log('Log-Eintrag erstellt')">Test</button></td>
+            </tr>
+            <tr>
+                <td><code>print()</code></td>
+                <td>Öffnet den Druckdialog der Seite</td>
+                <td><button onclick="window.print()">Test</button></td>
+            </tr>
+            <tr>
+                <td><code>location.reload()</code></td>
+                <td>Lädt die aktuelle Seite neu</td>
+                <td><button onclick="location.reload()">Test</button></td>
             </tr>
         </table>
     </section>
