@@ -1,8 +1,15 @@
+:root {
+    --js-black: black;
+    --js-yellow: yellow;
+}
+
+
+
 .nav-logo {
     width: 30px;
     height: 30px;
-    color: black;
-    background-color: yellow;
+    color: var(--js-black);
+    background-color: var(--js-yellow);
     font-family: sans-serif;
     font-weight: 750;
 }
