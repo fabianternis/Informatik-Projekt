@@ -1,3 +1,17 @@
+// ── Active nav link ───────────────────────────────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+
 // ── Interactivity text letter-split ──────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.interactivity-text');
