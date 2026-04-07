@@ -58,6 +58,8 @@ function createFloatingLogos() {
             logo.style.setProperty('--radius', `${radius}px`);
 
             const animName = cw ? 'orbitCW' : 'orbitCCW';
+            // Spread by negative delay: each logo is offset by 1/count of the full period.
+            // This works for both CW and CCW since the keyframe no longer uses --start-angle.
             const delay = -(duration / count) * i;
             logo.style.animation = `${animName} ${duration}s linear ${delay}s infinite`;
 
@@ -200,16 +202,22 @@ openLinkConfirm.addEventListener('click', () => {
     if (!_pendingHref) return;
     const count  = Math.max(1, Math.min(20, parseInt(openLinkCountEl.value, 10) || 1));
     const newTab = openLinkNewTabEl.checked;
-    closeAllPopovers();
-    for (let i = 0; i < count; i++) {
-        if (newTab) {
-            window.open(_pendingHref, '_blank', 'noopener,noreferrer');
-        } else {
-            window.location.href = _pendingHref;
-            break; // can only navigate once in same tab
-        }
-    }
+    const href   = _pendingHref;
     _pendingHref = null;
+    closeAllPopovers();
+
+    if (newTab) {
+        // open all count tabs in new windows
+        for (let i = 0; i < count; i++) {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }
+    } else {
+        // open (count - 1) extra tabs first, then navigate current window
+        for (let i = 0; i < count - 1; i++) {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }
+        window.location.href = href;
+    }
 });
 
 openLinkCancel.addEventListener('click', () => { _pendingHref = null; closeAllPopovers(); });

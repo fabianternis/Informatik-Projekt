@@ -107,13 +107,13 @@ body {
 }
 
 @keyframes orbitCW {
-    from { transform: rotate(var(--start-angle)) translateX(var(--radius)) rotate(calc(-1 * var(--start-angle))); }
-    to   { transform: rotate(calc(var(--start-angle) + 360deg)) translateX(var(--radius)) rotate(calc(-1 * (var(--start-angle) + 360deg))); }
+    from { transform: rotate(0deg)    translateX(var(--radius)) rotate(0deg); }
+    to   { transform: rotate(360deg)  translateX(var(--radius)) rotate(-360deg); }
 }
 
 @keyframes orbitCCW {
-    from { transform: rotate(var(--start-angle)) translateX(var(--radius)) rotate(calc(-1 * var(--start-angle))); }
-    to   { transform: rotate(calc(var(--start-angle) - 360deg)) translateX(var(--radius)) rotate(calc(-1 * (var(--start-angle) - 360deg))); }
+    from { transform: rotate(0deg)    translateX(var(--radius)) rotate(0deg); }
+    to   { transform: rotate(-360deg) translateX(var(--radius)) rotate(360deg); }
 }
 
 #hero h1 {
@@ -280,13 +280,23 @@ button:hover {
 #settings-toggle {
     background: none;
     border: none;
-    font-size: 1.2rem;
     cursor: pointer;
     padding: 0;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s, color 0.3s;
+}
+
+#settings-toggle svg {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 #settings-toggle:hover {
     background: none;
+    color: var(--js-yellow);
     transform: rotate(45deg);
 }
 
