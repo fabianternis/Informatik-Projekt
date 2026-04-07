@@ -58,8 +58,6 @@ function createFloatingLogos() {
             logo.style.setProperty('--radius', `${radius}px`);
 
             const animName = cw ? 'orbitCW' : 'orbitCCW';
-            // Spread by negative delay: each logo is offset by 1/count of the full period.
-            // This works for both CW and CCW since the keyframe no longer uses --start-angle.
             const delay = -(duration / count) * i;
             logo.style.animation = `${animName} ${duration}s linear ${delay}s infinite`;
 
