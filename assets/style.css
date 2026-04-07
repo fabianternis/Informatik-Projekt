@@ -95,8 +95,10 @@ body {
 
 .interactivity-text {
     display: inline-block;
-    white-space: nowrap; /* Verhindert Zeilenumbrüche bei der Animation */
-    color: var(--white); /* Fallback Farbe */
+    white-space: nowrap;
+    /* Verhindert Zeilenumbrüche bei der Animation */
+    color: var(--white);
+    /* Fallback Farbe */
     cursor: default;
     position: relative;
 }
@@ -104,7 +106,8 @@ body {
 /* Einzelne Buchstaben Styling */
 .char {
     display: inline-block;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncier Effekt */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncier Effekt */
     position: relative;
 }
 
@@ -112,13 +115,32 @@ body {
     animation: float 3s ease-in-out infinite;
 }
 
-.char:nth-child(odd) { animation-duration: 3.5s; animation-delay: 0.2s; }
-.char:nth-child(2n) { animation-duration: 3s; }
-.char:nth-child(3n) { animation-duration: 4s; animation-delay: 0.5s; }
+.char:nth-child(odd) {
+    animation-duration: 3.5s;
+    animation-delay: 0.2s;
+}
+
+.char:nth-child(2n) {
+    animation-duration: 3s;
+}
+
+.char:nth-child(3n) {
+    animation-duration: 4s;
+    animation-delay: 0.5s;
+}
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); opacity: 1; }
-    50% { transform: translateY(-4px); opacity: 0.8; }
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-4px);
+        opacity: 0.8;
+    }
 }
 
 .interactivity-text:hover .char {
@@ -179,7 +201,8 @@ table {
     overflow: hidden;
 }
 
-th, td {
+th,
+td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #333;
@@ -220,13 +243,31 @@ button:hover {
 }
 
 @media (max-width: 600px) {
-    #hero h1 { font-size: 2.5rem; }
-    #hero h3 { font-size: 1.2rem; }
-    .cta-container { flex-direction: column; align-items: center; }
-    table { font-size: 0.85rem; }
-    th, td { padding: 10px 5px; }
-    
-    .char { display: inline-block; }
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero h3 {
+        font-size: 1.2rem;
+    }
+
+    .cta-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th,
+    td {
+        padding: 10px 5px;
+    }
+
+    .char {
+        display: inline-block;
+    }
 }
 
 ::-webkit-scrollbar {
@@ -240,11 +281,16 @@ button:hover {
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--js-yellow);
-    border: 2px solid var(--bg-dark); /* Optional: Rand für besseren Kontrast */
+    border: 2px solid var(--bg-dark);
+    /* Optional: Rand für besseren Kontrast */
     border-radius: 4px;
 }
 
 ::selection {
     color: var(--js-black);
     background-color: var(--js-yellow);
+}
+
+.ts-logo-img {
+    display: none;
 }

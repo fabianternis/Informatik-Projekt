@@ -17,3 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+const jsLogo = document.querySelector('.js-logo-img');
+const tsLogo = document.querySelector('.ts-logo-img');
+
+jsLogo.addEventListener('mouseenter', () => {
+  jsLogo.style.display = 'none';
+  tsLogo.style.display = 'inline';
+});
+
+jsLogo.addEventListener('mouseleave', () => {
+  jsLogo.style.display = 'inline';
+  tsLogo.style.display = 'none';
+});
