@@ -1,16 +1,46 @@
-// ── Active nav link ───────────────────────────────────────────────────────────
-const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+// ── SPA Routing & Active nav link ───────────────────────────────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-links a');
+const views = document.querySelectorAll('.page-view');
 
-const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(a => a.classList.remove('active'));
-        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-    });
-}, { threshold: 0.3 });
+function handleRoute() {
+    const hash = window.location.hash || '#/';
+    
+    // Switch Views based on hash path
+    if (hash.startsWith('#/')) {
+        const route = hash.substring(2) || 'home';
+        views.forEach(v => v.classList.add('hidden'));
+        
+        const targetView = document.getElementById(`view-${route}`) || document.getElementById('view-home');
+        if (targetView) targetView.classList.remove('hidden');
+        
+        // Update active links
+        navLinks.forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === hash || (hash === '#/' && a.getAttribute('href') === '#hero')) {
+                a.classList.add('active');
+            }
+        });
+        window.scrollTo(0, 0);
+    } else {
+        // Assume in-page anchor, make sure we show Home View if it was a Home internal link
+        document.getElementById('view-home').classList.remove('hidden');
+        
+        // Wait for render to scroll
+        setTimeout(() => {
+            if (hash) {
+                const el = document.querySelector(hash);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 10);
+    }
+}
 
-document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+window.addEventListener('hashchange', handleRoute);
+window.addEventListener('DOMContentLoaded', handleRoute);
+
+// Instead of intersection observer for everything, we just rely on hash paths for "Pages"
+// The user scrolls naturally inside of them.
+
 
 // ── Interactivity text letter-split ──────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -239,8 +269,8 @@ document.addEventListener('click', (e) => {
     const anchor = e.target.closest('a[href]');
     if (!anchor) return;
     const href = anchor.getAttribute('href');
-    // skip pure hash anchors (in-page navigation)
-    if (href && href.startsWith('#')) return;
+    // skip pure hash anchors (in-page navigation) OR SPA routing #/
+    if (href && (href.startsWith('#'))) return;
     openLink(href, e);
 });
 
