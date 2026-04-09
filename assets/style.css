@@ -769,3 +769,53 @@ section h2 {
     .tutorial-card { flex: 0 0 300px; }
     .ts-intro { flex-direction: column; }
 }
+
+/* ── Playground Elements ─────────────────────────────────────────────────── */
+.playground-editor-wrapper {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#playground-code {
+    width: 100%;
+    height: 250px;
+    background-color: #1a1a1a;
+    color: var(--js-yellow);
+    font-family: var(--code-font);
+    font-size: 1rem;
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    resize: vertical;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+}
+
+#playground-code:focus {
+    outline: 1px solid var(--js-yellow);
+    border-color: var(--js-yellow);
+}
+
+.playground-output-wrapper {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 15px;
+    min-height: 100px;
+}
+
+.playground-output-wrapper h4 {
+    margin: 0 0 10px 0;
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+#playground-out {
+    color: #dfdfdf;
+    font-family: var(--code-font);
+    white-space: pre-wrap;
+    margin: 0;
+    font-size: 0.95rem;
+}

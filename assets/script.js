@@ -293,3 +293,53 @@ if (confettiBtn) {
         }, 250);
     });
 }
+
+// ── Playground Logic ──────────────────────────────────────────────────────────
+
+function openInPlayground(code) {
+    const editor = document.getElementById('playground-code');
+    if (editor) {
+        editor.value = code;
+    }
+    // Navigate to playground view
+    window.location.hash = '#/playground';
+}
+
+const runBtn = document.getElementById('run-code-btn');
+const playOut = document.getElementById('playground-out');
+
+if (runBtn && playOut) {
+    runBtn.addEventListener('click', () => {
+        const code = document.getElementById('playground-code').value;
+        playOut.textContent = ''; // clear previous output
+        
+        // intercept console.log momentarily
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const originalError = console.error;
+        
+        function appendOutput(type, ...args) {
+            const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+            playOut.textContent += `[${type}] ${msg}\n`;
+        }
+
+        console.log = (...args) => { appendOutput('LOG', ...args); originalLog.apply(console, args); };
+        console.warn = (...args) => { appendOutput('WARN', ...args); originalWarn.apply(console, args); };
+        console.error = (...args) => { appendOutput('ERR', ...args); originalError.apply(console, args); };
+        
+        try {
+            const result = eval(code);
+            if (result !== undefined) {
+                playOut.textContent += '\n\u276F ' + (typeof result === 'object' ? JSON.stringify(result) : result) + '\n';
+            }
+        } catch (error) {
+            playOut.textContent += '\n\u2718 ' + error.name + ': ' + error.message + '\n';
+        }
+        
+        // restore
+        console.log = originalLog;
+        console.warn = originalWarn;
+        console.error = originalError;
+    });
+}
+

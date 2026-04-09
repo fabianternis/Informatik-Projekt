@@ -48,6 +48,26 @@
                 </div>
             </section>
 
+            <section id="functions-preview">
+                <h2>Einige Funktionen</h2>
+                <p class="section-intro">Ein kurzer Vorgeschmack. Die volle Liste findest du auf der "Funktionen"-Seite.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Funktion</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>alert()</code></td><td>Zeigt ein Informationsfenster.</td></tr>
+                        <tr><td><code>console.log()</code></td><td>Gibt Daten in der Konsole aus.</td></tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#/functions" class="cta-primary" style="font-size: 1.1rem;">Zu allen Funktionen</a>
+                </div>
+            </section>
+
             <section id="tutorials">
                 <h2>Tutorials</h2>
                 <p class="section-intro">Eine Auswahl an Video-Tutorials und Lernressourcen für den Einstieg in JavaScript.</p>
@@ -218,32 +238,37 @@ tsc meinSkript.ts
                         <tr>
                             <td><code>alert()</code></td>
                             <td>Zeigt ein einfaches Informationsfenster an.</td>
-                            <td><button onclick="alert('Hallo Welt!')">Test</button></td>
-                        </tr>
-                        <tr>
-                            <td><code>confirm()</code></td>
-                            <td>Fragt Ja/Nein ab und gibt <code>true</code> oder <code>false</code> zurück.</td>
-                            <td><button onclick="confirm('Bist du bereit?')">Test</button></td>
+                            <td><button onclick="openInPlayground('alert(\'Hallo Welt!\');')">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>prompt()</code></td>
                             <td>Öffnet ein Eingabefeld für den Nutzer.</td>
-                            <td><button onclick="prompt('Dein Name:')">Test</button></td>
+                            <td><button onclick="openInPlayground('let username = prompt(\'Dein Name:\');\nconsole.log(\'Hallo \' + username);')">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>console.log()</code></td>
                             <td>Gibt Daten in der Konsole aus. <br><small>(Auch: <code>.warn()</code>, <code>.error()</code>)</small></td>
-                            <td><button onclick="console.log('Log-Eintrag!'); console.warn('Warnung!'); console.error('Fehler!')">Test</button></td>
+                            <td><button onclick="openInPlayground('console.log(\'Log-Eintrag!\');\nconsole.warn(\'Warnung!\');')">Im Playground testen</button></td>
                         </tr>
                         <tr>
-                            <td><code>window.print()</code></td>
-                            <td>Druckt das aktuelle Dokument.</td>
-                            <td><button onclick="window.print()">Test</button></td>
+                            <td><code>Math.random()</code></td>
+                            <td>Erzeugt eine zufällige Zahl zwischen 0 und 1.</td>
+                            <td><button onclick="openInPlayground('let rnd = Math.random();\nconsole.log(\'Zufallszahl: \' + rnd);')">Im Playground testen</button></td>
                         </tr>
                         <tr>
-                            <td><code>location.reload()</code></td>
-                            <td>Aktualisiert die Seite im Browser.</td>
-                            <td><button onclick="location.reload()">Test</button></td>
+                            <td><code>setTimeout()</code></td>
+                            <td>Führt Code nach einer bestimmten Wartezeit (in MS) aus.</td>
+                            <td><button onclick="openInPlayground('console.log(\'Warte 2 Sekunden...\');\nsetTimeout(() => {\n  console.log(\'Zeit ist um!\');\n}, 2000);')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>Array.map()</code></td>
+                            <td>Wendet eine Funktion auf alle Elemente eines Arrays an.</td>
+                            <td><button onclick="openInPlayground('const nummern = [1, 2, 3];\nconst verdoppelt = nummern.map(n => n * 2);\nconsole.log(verdoppelt);')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>document.getElementById()</code></td>
+                            <td>Sucht ein HTML-Element anhand seiner ID.</td>
+                            <td><button onclick="openInPlayground('const el = document.getElementById(\'confetti-btn\');\nconsole.log(el.innerText);')">Im Playground testen</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -256,29 +281,44 @@ tsc meinSkript.ts
         <div id="view-playground" class="page-view hidden">
             <section id="playground">
                 <h2>Developer Playground</h2>
-                <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+                <div style="text-align: center; margin-bottom: 20px;">
                     <a href="assets/img/playground.png" target="_blank">
-                        <!-- Erfüllt Kriterium: Bild mit einem Hyperlink, falls logo.png nicht reicht -->
-                        <img src="assets/img/playground.png" alt="JS Code Landscape" style="max-width: 100%; border-radius: 12px; border: 2px solid var(--js-yellow);">
+                        <!-- Erfüllt Kriterium: Bild mit einem Hyperlink -->
+                        <img src="assets/img/playground.png" alt="JS Code Landscape" style="max-width: 100%; height: 120px; object-fit: cover; border-radius: 12px; border: 1px solid #555;">
                     </a>
                 </div>
 
+                <p class="section-intro">Schreibe deinen eigenen JavaScript-Code und führe ihn im Browser aus.</p>
+
                 <!-- Erfüllt Kriterium: Trennstrich <hr> -->
+                <hr style="border: 1px solid #333; margin: 30px 0;">
+
+                <div class="playground-editor-wrapper">
+                    <textarea id="playground-code" spellcheck="false" placeholder="// Schreibe JavaScript hier...&#10;console.log('Hallo vom Playground!');"></textarea>
+                </div>
+                
+                <div style="margin-top: 15px; display: flex; gap: 10px;">
+                    <button id="run-code-btn" class="cta-primary" style="flex: 1; padding: 12px; font-size: 1.1rem;">▶ Code ausführen</button>
+                </div>
+
+                <div class="playground-output-wrapper">
+                    <h4>Console Output:</h4>
+                    <pre id="playground-out"></pre>
+                </div>
+
                 <hr style="border: 1px solid #333; margin: 40px 0;">
 
-                <h3>Wie funktioniert der Playground?</h3>
-                <p>Dieser interaktive Bereich hilft dabei, JavaScript-Befehle direkt im Browser auszuprobieren. Folge den Anweisungen, um zu sehen, was passiert!</p>
-                
+                <h3>Tipps & Tricks</h3>
                 <!-- Erfüllt Kriterium: Sortierte Liste (nummeriert) -->
                 <ol class="styled-list">
-                    <li>Klicke auf den Confetti-Button unten.</li>
-                    <li>Sammle die Easter Eggs.</li>
-                    <li>Erstelle deine eigenen Funktionen und werde zum Entwickler-Pro!</li>
+                    <li>Nutze <code>console.log()</code>, um Werte auszugeben.</li>
+                    <li>Schreibe <code>confetti()</code> in den Editor und führe es aus!</li>
+                    <li>Sammle die Easter Eggs oder erstelle eigene Funktionen.</li>
                 </ol>
 
-                <div style="text-align: center; margin-top: 50px;">
-                    <button id="confetti-btn" class="cta-primary" style="font-size: 1.2rem; padding: 15px 30px; display: inline-flex; align-items: center; gap: 10px;">
-                        🎉 Confetti Bomb!
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="confetti-btn" class="cta-secondary" style="font-size: 0.9rem; padding: 8px 16px;">
+                        Manueller Confetti Button
                     </button>
                 </div>
             </section>
