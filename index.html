@@ -48,23 +48,57 @@
                 </div>
             </section>
 
-            <section id="functions-preview">
+            <section id="functions">
                 <h2>Einige Funktionen</h2>
-                <p class="section-intro">Ein kurzer Vorgeschmack. Die volle Liste findest du auf der "Funktionen"-Seite.</p>
+                <p class="section-intro">Ein kurzer Vorgeschmack. Die volle Liste findest du auf der separaten Funktionen-Seite.</p>
                 <table>
                     <thead>
                         <tr>
                             <th>Funktion</th>
                             <th>Beschreibung</th>
+                            <th>Demo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>alert()</code></td><td>Zeigt ein Informationsfenster.</td></tr>
-                        <tr><td><code>console.log()</code></td><td>Gibt Daten in der Konsole aus.</td></tr>
+                        <tr>
+                            <td><code>alert()</code></td>
+                            <td>Zeigt ein einfaches Informationsfenster an.</td>
+                            <td><button onclick="openInPlayground('alert(\'Hallo Welt!\');')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>prompt()</code></td>
+                            <td>Öffnet ein Eingabefeld für den Nutzer.</td>
+                            <td><button onclick="openInPlayground('let username = prompt(\'Dein Name:\');\nconsole.log(\'Hallo \' + username);')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>console.log()</code></td>
+                            <td>Gibt Daten in der Konsole aus. <br><small>(Auch: <code>.warn()</code>, <code>.error()</code>)</small></td>
+                            <td><button onclick="openInPlayground('console.log(\'Log-Eintrag!\');\nconsole.warn(\'Warnung!\');')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>Math.random()</code></td>
+                            <td>Erzeugt eine zufällige Zahl zwischen 0 und 1.</td>
+                            <td><button onclick="openInPlayground('let rnd = Math.random();\nconsole.log(\'Zufallszahl: \' + rnd);')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>setTimeout()</code></td>
+                            <td>Führt Code nach einer bestimmten Wartezeit (in MS) aus.</td>
+                            <td><button onclick="openInPlayground('console.log(\'Warte 2 Sekunden...\');\nsetTimeout(() => {\n  console.log(\'Zeit ist um!\');\n}, 2000);')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>Array.map()</code></td>
+                            <td>Wendet eine Funktion auf alle Elemente eines Arrays an.</td>
+                            <td><button onclick="openInPlayground('const nummern = [1, 2, 3];\nconst verdoppelt = nummern.map(n => n * 2);\nconsole.log(verdoppelt);')">Im Playground testen</button></td>
+                        </tr>
+                        <tr>
+                            <td><code>document.getElementById()</code></td>
+                            <td>Sucht ein HTML-Element anhand seiner ID.</td>
+                            <td><button onclick="openInPlayground('const el = document.getElementById(\'confetti-btn\');\nif(el) console.log(el.innerText);')">Im Playground testen</button></td>
+                        </tr>
                     </tbody>
                 </table>
                 <div style="text-align: center; margin-top: 30px;">
-                    <a href="#/functions" class="cta-primary" style="font-size: 1.1rem;">Zu allen Funktionen</a>
+                    <a href="#/functions" class="cta-primary" style="font-size: 1.1rem;">Zu allen weiteren Funktionen</a>
                 </div>
             </section>
 
@@ -222,57 +256,7 @@ tsc meinSkript.ts
         <!-- VIEW: FUNCTIONS         -->
         <!-- ======================= -->
         <div id="view-functions" class="page-view hidden">
-            <section id="functions">
-                <h2>Wichtige Funktionen</h2>
-                <p class="section-intro">Hier ist eine Übersicht der häufigsten Funktionen, die du zum Starten mit JS brauchst.</p>
-                
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Funktion</th>
-                            <th>Beschreibung</th>
-                            <th>Demo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>alert()</code></td>
-                            <td>Zeigt ein einfaches Informationsfenster an.</td>
-                            <td><button onclick="openInPlayground('alert(\'Hallo Welt!\');')">Im Playground testen</button></td>
-                        </tr>
-                        <tr>
-                            <td><code>prompt()</code></td>
-                            <td>Öffnet ein Eingabefeld für den Nutzer.</td>
-                            <td><button onclick="openInPlayground('let username = prompt(\'Dein Name:\');\nconsole.log(\'Hallo \' + username);')">Im Playground testen</button></td>
-                        </tr>
-                        <tr>
-                            <td><code>console.log()</code></td>
-                            <td>Gibt Daten in der Konsole aus. <br><small>(Auch: <code>.warn()</code>, <code>.error()</code>)</small></td>
-                            <td><button onclick="openInPlayground('console.log(\'Log-Eintrag!\');\nconsole.warn(\'Warnung!\');')">Im Playground testen</button></td>
-                        </tr>
-                        <tr>
-                            <td><code>Math.random()</code></td>
-                            <td>Erzeugt eine zufällige Zahl zwischen 0 und 1.</td>
-                            <td><button onclick="openInPlayground('let rnd = Math.random();\nconsole.log(\'Zufallszahl: \' + rnd);')">Im Playground testen</button></td>
-                        </tr>
-                        <tr>
-                            <td><code>setTimeout()</code></td>
-                            <td>Führt Code nach einer bestimmten Wartezeit (in MS) aus.</td>
-                            <td><button onclick="openInPlayground('console.log(\'Warte 2 Sekunden...\');\nsetTimeout(() => {\n  console.log(\'Zeit ist um!\');\n}, 2000);')">Im Playground testen</button></td>
-                        </tr>
-                        <tr>
-                            <td><code>Array.map()</code></td>
-                            <td>Wendet eine Funktion auf alle Elemente eines Arrays an.</td>
-                            <td><button onclick="openInPlayground('const nummern = [1, 2, 3];\nconst verdoppelt = nummern.map(n => n * 2);\nconsole.log(verdoppelt);')">Im Playground testen</button></td>
-                        </tr>
-                        <tr>
-                            <td><code>document.getElementById()</code></td>
-                            <td>Sucht ein HTML-Element anhand seiner ID.</td>
-                            <td><button onclick="openInPlayground('const el = document.getElementById(\'confetti-btn\');\nconsole.log(el.innerText);')">Im Playground testen</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            <!-- Dynamischer Inhalt wird hier von JS geladen/gerendert -->
         </div>
 
         <!-- ======================= -->
@@ -281,12 +265,6 @@ tsc meinSkript.ts
         <div id="view-playground" class="page-view hidden">
             <section id="playground">
                 <h2>Developer Playground</h2>
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <a href="assets/img/playground.png" target="_blank">
-                        <!-- Erfüllt Kriterium: Bild mit einem Hyperlink -->
-                        <img src="assets/img/playground.png" alt="JS Code Landscape" style="max-width: 100%; height: 120px; object-fit: cover; border-radius: 12px; border: 1px solid #555;">
-                    </a>
-                </div>
 
                 <p class="section-intro">Schreibe deinen eigenen JavaScript-Code und führe ihn im Browser aus.</p>
 
