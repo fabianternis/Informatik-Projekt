@@ -1,117 +1,24 @@
-// ── SPA Routing & Active nav link ───────────────────────────────────────────────────────────
-const navLinks = document.querySelectorAll('.nav-links a');
-const views = document.querySelectorAll('.page-view');
-
-function handleRoute() {
-    const hash = window.location.hash || '#/';
-    
-    // Switch Views based on hash path
-    if (hash.startsWith('#/')) {
-        const route = hash.substring(2) || 'home';
-        views.forEach(v => v.classList.add('hidden'));
-        
-        const targetView = document.getElementById(`view-${route}`) || document.getElementById('view-home');
-        if (targetView) {
-            targetView.classList.remove('hidden');
-            if (route === 'functions') {
-                renderFunctionsPage(); // Render dynamically to prevent DOM parsing if not visited
-            } else {
-                clearFunctionsPage(); // Remove from DOM when leaving
-            }
-        }
-        
-        // Update active links
-        navLinks.forEach(a => {
-            a.classList.remove('active');
-            if (a.getAttribute('href') === hash || (hash === '#/' && a.getAttribute('href') === '#hero')) {
-                a.classList.add('active');
-            }
-        });
-        window.scrollTo(0, 0);
-    } else {
-        // Assume in-page anchor, make sure we show Home View if it was a Home internal link
-        document.getElementById('view-home').classList.remove('hidden');
-        
-        // Wait for render to scroll
+// ── Page Scroll & initialization ────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+    // Check if we came from an anchor link
+    if (window.location.hash) {
         setTimeout(() => {
-            if (hash) {
-                const el = document.querySelector(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 10);
+            const el = document.querySelector(window.location.hash);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
     }
+    
+    // Check for Playground Code param
+    const codeParam = new URLSearchParams(window.location.search).get('code');
+    const editor = document.getElementById('playground-code');
+    if (editor && codeParam) {
+        editor.value = decodeURIComponent(codeParam);
+    }
+});
+
+function openInPlayground(code) {
+    window.location.href = '/playground?code=' + encodeURIComponent(code);
 }
-
-// ── Dynamic Functions Renderer ────────────────────────────────────────────────
-const allFunctions = [
-    { title: "String.prototype.toUpperCase()", desc: "Wandelt einen String in Großbuchstaben um.", code: "let str = 'hallo';\nconsole.log(str.toUpperCase());" },
-    { title: "String.prototype.toLowerCase()", desc: "Wandelt einen String in Kleinbuchstaben um.", code: "let str = 'WELT';\nconsole.log(str.toLowerCase());" },
-    { title: "String.prototype.includes()", desc: "Prüft, ob ein Teilstring enthalten ist.", code: "let txt = 'JS ist super!';\nconsole.log(txt.includes('super'));" },
-    { title: "String.prototype.split()", desc: "Zerteilt einen String in ein Array.", code: "let list = 'Apfel,Birne,Banane';\nconsole.log(list.split(','));" },
-    { title: "Array.prototype.push()", desc: "Fügt ein Element am Ende des Arrays an.", code: "let arr = [1, 2];\narr.push(3);\nconsole.log(arr);" },
-    { title: "Array.prototype.pop()", desc: "Entfernt das letzte Element aus einem Array.", code: "let arr = [1, 2, 3];\narr.pop();\nconsole.log(arr);" },
-    { title: "Array.prototype.filter()", desc: "Filtert Array-Elemente nach einer Bedingung.", code: "let nums = [1, 5, 10, 15];\nlet big = nums.filter(n => n > 5);\nconsole.log(big);" },
-    { title: "Array.prototype.reduce()", desc: "Reduziert das Array auf einen einzigen Wert.", code: "let nums = [1, 2, 3, 4];\nlet sum = nums.reduce((a, b) => a + b, 0);\nconsole.log(sum);" },
-    { title: "Math.round()", desc: "Rundet eine Zahl auf die nächste Ganzzahl.", code: "console.log(Math.round(4.7));\nconsole.log(Math.round(4.3));" },
-    { title: "Math.floor()", desc: "Rundet eine Zahl immer ab.", code: "console.log(Math.floor(4.9));" },
-    { title: "Math.ceil()", desc: "Rundet eine Zahl immer auf.", code: "console.log(Math.ceil(4.1));" },
-    { title: "Object.keys()", desc: "Gibt alle Schlüsselnamen eines Objekts als Array zurück.", code: "let user = {name: 'Anna', age: 20};\nconsole.log(Object.keys(user));" },
-    { title: "Object.values()", desc: "Gibt alle Werte eines Objekts als Array zurück.", code: "let user = {name: 'Anna', age: 20};\nconsole.log(Object.values(user));" },
-    { title: "JSON.stringify()", desc: "Wandelt ein JS-Objekt in einen JSON-String um.", code: "let obj = { x: 5, y: 6 };\nconsole.log(JSON.stringify(obj));" },
-    { title: "JSON.parse()", desc: "Wandelt einen JSON-String in ein JS-Objekt um.", code: "let json = '{\"z\": 10}';\nlet obj = JSON.parse(json);\nconsole.log(obj.z);" },
-    { title: "setInterval()", desc: "Wiederholt Code in einem bestimmten Intervall.", code: "let i = 0;\nlet id = setInterval(() => {\n  console.log('Tick', ++i);\n  if(i >= 3) clearInterval(id);\n}, 500);" },
-    { title: "fetch()", desc: "Lädt Daten von einer API/URL (Netzwerkanfrage).", code: "fetch('https://jsonplaceholder.typicode.com/todos/1')\n  .then(res => res.json())\n  .then(data => console.log(data));" }
-];
-
-function renderFunctionsPage() {
-    const container = document.getElementById('view-functions');
-    if (!container || container.innerHTML.trim() !== '') return; // already rendered
-
-    let html = `
-        <section id="functions-extended">
-            <h2>Alle Funktionen (Extended List)</h2>
-            <p class="section-intro">Hier ist die gigantische Liste an Funktionen. Sie existiert nur im DOM, wenn diese Seite aktiv ist!</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Funktion / Methode</th>
-                        <th>Beschreibung</th>
-                        <th>Demo</th>
-                    </tr>
-                </thead>
-                <tbody>
-    `;
-
-    allFunctions.forEach(fn => {
-        const escd = fn.code.replace(/'/g, "\\'").replace(/\n/g, "\\n");
-        html += `
-            <tr>
-                <td><code>${fn.title}</code></td>
-                <td>${fn.desc}</td>
-                <td><button onclick="openInPlayground('${escd}')">Im Playground testen</button></td>
-            </tr>
-        `;
-    });
-
-    html += `
-                </tbody>
-            </table>
-        </section>
-    `;
-    container.innerHTML = html;
-}
-
-function clearFunctionsPage() {
-    const container = document.getElementById('view-functions');
-    if (container) container.innerHTML = '';
-}
-
-window.addEventListener('hashchange', handleRoute);
-window.addEventListener('DOMContentLoaded', handleRoute);
-
-// Instead of intersection observer for everything, we just rely on hash paths for "Pages"
-// The user scrolls naturally inside of them.
-
 
 // ── Interactivity text letter-split ──────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -340,8 +247,8 @@ document.addEventListener('click', (e) => {
     const anchor = e.target.closest('a[href]');
     if (!anchor) return;
     const href = anchor.getAttribute('href');
-    // skip pure hash anchors (in-page navigation) OR SPA routing #/
-    if (href && (href.startsWith('#'))) return;
+    // skip pure hash anchors OR openLink calls
+    if (href && href.startsWith('#')) return;
     openLink(href, e);
 });
 
@@ -368,12 +275,7 @@ if (confettiBtn) {
 // ── Playground Logic ──────────────────────────────────────────────────────────
 
 function openInPlayground(code) {
-    const editor = document.getElementById('playground-code');
-    if (editor) {
-        editor.value = code;
-    }
-    // Navigate to playground view
-    window.location.hash = '#/playground';
+    window.location.href = '/playground?code=' + encodeURIComponent(code);
 }
 
 const runBtn = document.getElementById('run-code-btn');
