@@ -6,126 +6,9 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Beispiele – JavaScript</title>
     <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/examples.css">
     <link rel="shortcut icon" href="assets/img/javascript-logo-svgrepo-com.svg" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <style>
-        .examples-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            margin-top: 30px;
-        }
-        .example-card {
-            background: #252525;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 20px;
-        }
-        .example-card h3 {
-            color: var(--js-yellow);
-            margin: 0 0 12px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-        .examples-list-card {
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
-        }
-        .list-left {
-            flex: 0 0 200px;
-            display: flex;
-            flex-direction: column;
-        }
-        .list-right {
-            flex: 1;
-            display: flex;
-            gap: 24px;
-        }
-        .list-col {
-            flex: 1;
-        }
-        .list-input-row {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-        .list-input-row input {
-            flex: 1;
-            background: #1a1a1a;
-            border: 1px solid #444;
-            color: white;
-            padding: 8px 10px;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            min-width: 0;
-        }
-        .list-input-row input:focus { outline: 1px solid var(--js-yellow); border-color: var(--js-yellow); }
-        ol.js-list, ul.js-list {
-            margin: 0;
-            padding-left: 20px;
-            color: #ccc;
-            line-height: 2;
-            font-size: 0.9rem;
-        }
-        .debug-box {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 12px 14px;
-            font-family: var(--code-font);
-            font-size: 0.8rem;
-            color: #aaa;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-        .video-player-wrapper {
-            position: relative;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .video-player-wrapper video {
-            width: 100%;
-            display: block;
-        }
-        .video-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            background: #111;
-        }
-        .video-controls button {
-            background: var(--js-yellow);
-            color: #000;
-            border: none;
-            border-radius: 4px;
-            padding: 6px 12px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-        .video-controls button:hover { background: #e6ce1a; }
-        .video-progress {
-            flex: 1;
-            min-width: 0;
-        }
-        .video-time {
-            font-size: 0.8rem;
-            color: #aaa;
-            white-space: nowrap;
-            font-family: var(--code-font);
-        }
-        @media (max-width: 800px) {
-            .examples-list-card { flex-direction: column; }
-            .list-left { flex: none; width: 100%; }
-            .list-right { flex-direction: column; }
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -163,7 +46,7 @@
                                 <input type="text" id="list-input" placeholder="Eintrag hinzufügen...">
                                 <button id="list-add-btn">+</button>
                             </div>
-                            <button id="list-clear-btn" style="width:100%;background:#2a2a2a;color:#888;border:1px solid #333;margin-top:4px;">Liste leeren</button>
+                            <button id="list-clear-btn" class="list-clear-btn">Liste leeren</button>
                         </div>
                         <div class="list-right">
                             <div class="list-col">
@@ -177,9 +60,9 @@
                         </div>
                     </div>
 
-                    <div class="example-card" style="grid-column: 1 / -1;">
+                    <div class="example-card full-width">
                         <h3>Video Player</h3>
-                        <div class="list-input-row" style="margin-bottom:14px;">
+                        <div class="list-input-row vid-url-row">
                             <input type="url" id="vid-url-input" placeholder="Video-URL eingeben..." value="https://www.pexels.com/de-de/download/video/36448220/">
                             <button id="vid-url-btn">Laden</button>
                         </div>
@@ -194,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class="example-card" style="grid-column: 1 / -1;">
+                    <div class="example-card full-width">
                         <h3>Settings Debug</h3>
                         <pre id="debug-output" class="debug-box"></pre>
                     </div>
@@ -231,47 +114,47 @@
                 </div>
                 <div class="setting-group">
                     <label for="accent-color">Akzentfarbe:</label>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="color" id="accent-color" value="#f7df1e" style="width:40px;height:32px;padding:2px;cursor:pointer;">
-                        <button type="button" id="reset-accent" style="flex:1;font-size:0.8rem;padding:6px 8px;">Zurücksetzen</button>
+                    <div class="color-row">
+                        <input type="color" id="accent-color" value="#f7df1e" class="color-input">
+                        <button type="button" id="reset-accent" class="reset-btn">Zurücksetzen</button>
                     </div>
                 </div>
                 <div class="setting-group">
                     <label for="bg-color">Hintergrundfarbe:</label>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="color" id="bg-color" value="#1e1e1e" style="width:40px;height:32px;padding:2px;cursor:pointer;">
-                        <button type="button" id="reset-bg" style="flex:1;font-size:0.8rem;padding:6px 8px;">Zurücksetzen</button>
+                    <div class="color-row">
+                        <input type="color" id="bg-color" value="#1e1e1e" class="color-input">
+                        <button type="button" id="reset-bg" class="reset-btn">Zurücksetzen</button>
                     </div>
                 </div>
                 <div class="setting-group">
                     <label>
-                        <input type="checkbox" id="reduce-motion" style="margin-right:6px;">
+                        <input type="checkbox" id="reduce-motion" class="checkbox-inline">
                         Animationen reduzieren
                     </label>
                 </div>
-                <div style="display:flex;gap:8px;margin-top:15px;">
-                    <button type="button" id="reset-all-settings" style="flex:1;font-size:0.85rem;">Alles zurücksetzen</button>
-                    <button type="button" id="close-settings" class="cta-primary" style="flex:1;">Schließen</button>
+                <div class="popover-footer">
+                    <button type="button" id="reset-all-settings" class="reset-all-btn">Alles zurücksetzen</button>
+                    <button type="button" id="close-settings" class="cta-primary">Schließen</button>
                 </div>
             </form>
         </div>
 
         <div id="open-link-popover" class="hidden">
             <h3>Link öffnen</h3>
-            <p id="open-link-url" style="word-break:break-all;color:#aaa;font-size:0.85rem;margin:0 0 15px;"></p>
+            <p id="open-link-url" class="open-link-url"></p>
             <div class="setting-group">
                 <label for="open-link-count">Wie oft öffnen?</label>
-                <input type="number" id="open-link-count" min="1" max="20" value="1" style="background:#1e1e1e;color:white;border:1px solid #555;padding:8px;border-radius:4px;font-family:inherit;">
+                <input type="number" id="open-link-count" min="1" max="20" value="1" class="open-link-count-input">
             </div>
             <div class="setting-group">
                 <label>
-                    <input type="checkbox" id="open-link-newtab" checked style="margin-right:6px;">
+                    <input type="checkbox" id="open-link-newtab" checked class="checkbox-inline">
                     In neuem Tab öffnen
                 </label>
             </div>
-            <div style="display:flex;gap:8px;margin-top:15px;">
-                <button type="button" id="open-link-cancel" style="flex:1;">Abbrechen</button>
-                <button type="button" id="open-link-confirm" class="cta-primary" style="flex:1;">Öffnen</button>
+            <div class="popover-footer">
+                <button type="button" id="open-link-cancel">Abbrechen</button>
+                <button type="button" id="open-link-confirm" class="cta-primary">Öffnen</button>
             </div>
         </div>
     </main>

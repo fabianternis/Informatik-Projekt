@@ -75,47 +75,47 @@
                 </div>
                 <div class="setting-group">
                     <label for="accent-color">Akzentfarbe:</label>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="color" id="accent-color" value="#f7df1e" style="width:40px;height:32px;padding:2px;cursor:pointer;">
-                        <button type="button" id="reset-accent" style="flex:1;font-size:0.8rem;padding:6px 8px;">Zurücksetzen</button>
+                    <div class="color-row">
+                        <input type="color" id="accent-color" value="#f7df1e" class="color-input">
+                        <button type="button" id="reset-accent" class="reset-btn">Zurücksetzen</button>
                     </div>
                 </div>
                 <div class="setting-group">
                     <label for="bg-color">Hintergrundfarbe:</label>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="color" id="bg-color" value="#1e1e1e" style="width:40px;height:32px;padding:2px;cursor:pointer;">
-                        <button type="button" id="reset-bg" style="flex:1;font-size:0.8rem;padding:6px 8px;">Zurücksetzen</button>
+                    <div class="color-row">
+                        <input type="color" id="bg-color" value="#1e1e1e" class="color-input">
+                        <button type="button" id="reset-bg" class="reset-btn">Zurücksetzen</button>
                     </div>
                 </div>
                 <div class="setting-group">
                     <label>
-                        <input type="checkbox" id="reduce-motion" style="margin-right:6px;">
+                        <input type="checkbox" id="reduce-motion" class="checkbox-inline">
                         Animationen reduzieren
                     </label>
                 </div>
-                <div style="display:flex;gap:8px;margin-top:15px;">
-                    <button type="button" id="reset-all-settings" style="flex:1;font-size:0.85rem;">Alles zurücksetzen</button>
-                    <button type="button" id="close-settings" class="cta-primary" style="flex:1;">Schließen</button>
+                <div class="popover-footer">
+                    <button type="button" id="reset-all-settings" class="reset-all-btn">Alles zurücksetzen</button>
+                    <button type="button" id="close-settings" class="cta-primary">Schließen</button>
                 </div>
             </form>
         </div>
 
         <div id="open-link-popover" class="hidden">
             <h3>Link öffnen</h3>
-            <p id="open-link-url" style="word-break:break-all;color:#aaa;font-size:0.85rem;margin:0 0 15px;"></p>
+            <p id="open-link-url" class="open-link-url"></p>
             <div class="setting-group">
                 <label for="open-link-count">Wie oft öffnen?</label>
-                <input type="number" id="open-link-count" min="1" max="20" value="1" style="background:#1e1e1e;color:white;border:1px solid #555;padding:8px;border-radius:4px;font-family:inherit;">
+                <input type="number" id="open-link-count" min="1" max="20" value="1" class="open-link-count-input">
             </div>
             <div class="setting-group">
                 <label>
-                    <input type="checkbox" id="open-link-newtab" checked style="margin-right:6px;">
+                    <input type="checkbox" id="open-link-newtab" checked class="checkbox-inline">
                     In neuem Tab öffnen
                 </label>
             </div>
-            <div style="display:flex;gap:8px;margin-top:15px;">
-                <button type="button" id="open-link-cancel" style="flex:1;">Abbrechen</button>
-                <button type="button" id="open-link-confirm" class="cta-primary" style="flex:1;">Öffnen</button>
+            <div class="popover-footer">
+                <button type="button" id="open-link-cancel">Abbrechen</button>
+                <button type="button" id="open-link-confirm" class="cta-primary">Öffnen</button>
             </div>
         </div>
     </main>

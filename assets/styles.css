@@ -945,3 +945,99 @@ section h2 {
     margin: 0;
     font-size: 0.95rem;
 }
+
+.color-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.color-input {
+    width: 40px;
+    height: 32px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.reset-btn {
+    flex: 1;
+    font-size: 0.8rem;
+    padding: 6px 8px;
+}
+
+.checkbox-inline {
+    margin-right: 6px;
+}
+
+.popover-footer {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.popover-footer button {
+    flex: 1;
+}
+
+.popover-footer .reset-all-btn {
+    font-size: 0.85rem;
+}
+
+.open-link-url {
+    word-break: break-all;
+    color: #aaa;
+    font-size: 0.85rem;
+    margin: 0 0 15px;
+}
+
+.open-link-count-input {
+    background: #1e1e1e;
+    color: white;
+    border: 1px solid #555;
+    padding: 8px;
+    border-radius: 4px;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.section-divider {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 30px 0;
+}
+
+.section-divider--lg {
+    margin: 40px 0;
+}
+
+.playground-run-row {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.playground-run-btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 1.1rem;
+}
+
+.confetti-row {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.confetti-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+}
+
+.section-cta-row {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.cta-large {
+    font-size: 1.1rem;
+}

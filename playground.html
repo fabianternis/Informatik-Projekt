@@ -35,14 +35,14 @@
                 <h2>Developer Playground</h2>
                 <p class="section-intro">Schreibe deinen eigenen JavaScript-Code und führe ihn im Browser aus.</p>
 
-                <hr style="border: 1px solid #333; margin: 30px 0;">
+                <hr class="section-divider">
 
                 <div class="playground-editor-wrapper">
                     <textarea id="playground-code" spellcheck="false" placeholder="// Schreibe JavaScript hier...&#10;console.log('Hallo vom Playground!');"></textarea>
                 </div>
 
-                <div style="margin-top: 15px; display: flex; gap: 10px;">
-                    <button id="run-code-btn" class="cta-primary" style="flex: 1; padding: 12px; font-size: 1.1rem;">Code ausführen</button>
+                <div class="playground-run-row">
+                    <button id="run-code-btn" class="cta-primary playground-run-btn">Code ausführen</button>
                 </div>
 
                 <div class="playground-output-wrapper">
@@ -50,7 +50,7 @@
                     <pre id="playground-out"></pre>
                 </div>
 
-                <hr style="border: 1px solid #333; margin: 40px 0;">
+                <hr class="section-divider section-divider--lg">
 
                 <h3>Tipps &amp; Tricks</h3>
                 <ol class="styled-list">
@@ -59,8 +59,8 @@
                     <li>Sammle die Easter Eggs oder erstelle eigene Funktionen.</li>
                 </ol>
 
-                <div style="text-align: center; margin-top: 20px;">
-                    <button id="confetti-btn" class="cta-secondary" style="font-size: 0.9rem; padding: 8px 16px;">
+                <div class="confetti-row">
+                    <button id="confetti-btn" class="cta-secondary confetti-btn">
                         Manueller Confetti Button
                     </button>
                 </div>
@@ -95,47 +95,47 @@
                 </div>
                 <div class="setting-group">
                     <label for="accent-color">Akzentfarbe:</label>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="color" id="accent-color" value="#f7df1e" style="width:40px;height:32px;padding:2px;cursor:pointer;">
-                        <button type="button" id="reset-accent" style="flex:1;font-size:0.8rem;padding:6px 8px;">Zurücksetzen</button>
+                    <div class="color-row">
+                        <input type="color" id="accent-color" value="#f7df1e" class="color-input">
+                        <button type="button" id="reset-accent" class="reset-btn">Zurücksetzen</button>
                     </div>
                 </div>
                 <div class="setting-group">
                     <label for="bg-color">Hintergrundfarbe:</label>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="color" id="bg-color" value="#1e1e1e" style="width:40px;height:32px;padding:2px;cursor:pointer;">
-                        <button type="button" id="reset-bg" style="flex:1;font-size:0.8rem;padding:6px 8px;">Zurücksetzen</button>
+                    <div class="color-row">
+                        <input type="color" id="bg-color" value="#1e1e1e" class="color-input">
+                        <button type="button" id="reset-bg" class="reset-btn">Zurücksetzen</button>
                     </div>
                 </div>
                 <div class="setting-group">
                     <label>
-                        <input type="checkbox" id="reduce-motion" style="margin-right:6px;">
+                        <input type="checkbox" id="reduce-motion" class="checkbox-inline">
                         Animationen reduzieren
                     </label>
                 </div>
-                <div style="display:flex;gap:8px;margin-top:15px;">
-                    <button type="button" id="reset-all-settings" style="flex:1;font-size:0.85rem;">Alles zurücksetzen</button>
-                    <button type="button" id="close-settings" class="cta-primary" style="flex:1;">Schließen</button>
+                <div class="popover-footer">
+                    <button type="button" id="reset-all-settings" class="reset-all-btn">Alles zurücksetzen</button>
+                    <button type="button" id="close-settings" class="cta-primary">Schließen</button>
                 </div>
             </form>
         </div>
 
         <div id="open-link-popover" class="hidden">
             <h3>Link öffnen</h3>
-            <p id="open-link-url" style="word-break:break-all;color:#aaa;font-size:0.85rem;margin:0 0 15px;"></p>
+            <p id="open-link-url" class="open-link-url"></p>
             <div class="setting-group">
                 <label for="open-link-count">Wie oft öffnen?</label>
-                <input type="number" id="open-link-count" min="1" max="20" value="1" style="background:#1e1e1e;color:white;border:1px solid #555;padding:8px;border-radius:4px;font-family:inherit;">
+                <input type="number" id="open-link-count" min="1" max="20" value="1" class="open-link-count-input">
             </div>
             <div class="setting-group">
                 <label>
-                    <input type="checkbox" id="open-link-newtab" checked style="margin-right:6px;">
+                    <input type="checkbox" id="open-link-newtab" checked class="checkbox-inline">
                     In neuem Tab öffnen
                 </label>
             </div>
-            <div style="display:flex;gap:8px;margin-top:15px;">
-                <button type="button" id="open-link-cancel" style="flex:1;">Abbrechen</button>
-                <button type="button" id="open-link-confirm" class="cta-primary" style="flex:1;">Öffnen</button>
+            <div class="popover-footer">
+                <button type="button" id="open-link-cancel">Abbrechen</button>
+                <button type="button" id="open-link-confirm" class="cta-primary">Öffnen</button>
             </div>
         </div>
     </main>

@@ -1,0 +1,158 @@
+.examples-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.example-card {
+    background: #252525;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.example-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.example-card h3 {
+    color: var(--js-yellow);
+    margin: 0 0 12px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.examples-list-card {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.list-left {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-right {
+    flex: 1;
+    display: flex;
+    gap: 24px;
+}
+
+.list-col {
+    flex: 1;
+}
+
+.list-input-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.list-input-row input {
+    flex: 1;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    min-width: 0;
+}
+
+.list-input-row input:focus {
+    outline: 1px solid var(--js-yellow);
+    border-color: var(--js-yellow);
+}
+
+.list-clear-btn {
+    width: 100%;
+    background: #2a2a2a;
+    color: #888;
+    border: 1px solid #333;
+    margin-top: 4px;
+}
+
+ol.js-list,
+ul.js-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #ccc;
+    line-height: 2;
+    font-size: 0.9rem;
+}
+
+.debug-box {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: var(--code-font);
+    font-size: 0.8rem;
+    color: #aaa;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin: 0;
+}
+
+.vid-url-row {
+    margin-bottom: 14px;
+}
+
+.video-player-wrapper {
+    position: relative;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-player-wrapper video {
+    width: 100%;
+    display: block;
+}
+
+.video-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #111;
+}
+
+.video-controls button {
+    background: var(--js-yellow);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.video-controls button:hover {
+    background: #e6ce1a;
+}
+
+.video-progress {
+    flex: 1;
+    min-width: 0;
+}
+
+.video-time {
+    font-size: 0.8rem;
+    color: #aaa;
+    white-space: nowrap;
+    font-family: var(--code-font);
+}
+
+@media (max-width: 800px) {
+    .examples-list-card { flex-direction: column; }
+    .list-left { flex: none; width: 100%; }
+    .list-right { flex-direction: column; }
+}
