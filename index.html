@@ -10,16 +10,16 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="nav-logo">
+        <a href="index.html" class="nav-logo" data-no-popover>
             <div class="js-logo">JS</div>.fabianternis.de
         </a>
         <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="functions.html">Funktionen</a>
+            <a href="index.html" class="active" data-no-popover>Home</a>
+            <a href="functions.html" data-no-popover>Funktionen</a>
             <a href="index.html#tutorials">Tutorials</a>
             <a href="index.html#typescript">TypeScript</a>
             <a href="index.html#anderes">Anderes</a>
-            <a href="playground.html">Playground</a>
+            <a href="playground.html" data-no-popover>Playground</a>
             <button id="settings-toggle" title="Einstellungen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.43l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
@@ -37,7 +37,7 @@
                         <div class="interactivity-text">Interaktivität</div> für das Web
                     </h3>
                     <div class="cta-container">
-                        <a href="functions.html" class="cta-primary">Funktionen</a>
+                        <a href="functions.html" class="cta-primary" data-no-popover>Funktionen</a>
                         <a href="index.html#tutorials" class="cta-secondary">Tutorials</a>
                     </div>
                 </div>
@@ -58,42 +58,42 @@
                         <tr>
                             <td><code>alert()</code></td>
                             <td>Zeigt ein einfaches Informationsfenster an.</td>
-                            <td><button onclick="openInPlayground('alert(\'Hallo Welt!\');')">Im Playground testen</button></td>
+                            <td><button class="playground-btn" data-code="alert('Hallo Welt!');">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>prompt()</code></td>
                             <td>Öffnet ein Eingabefeld für den Nutzer.</td>
-                            <td><button onclick="openInPlayground('let username = prompt(\'Dein Name:\');\nconsole.log(\'Hallo \' + username);')">Im Playground testen</button></td>
+                            <td><button class="playground-btn" data-code="let username = prompt('Dein Name:');&#10;console.log('Hallo ' + username);">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>console.log()</code></td>
                             <td>Gibt Daten in der Konsole aus. <br><small>(Auch: <code>.warn()</code>, <code>.error()</code>)</small></td>
-                            <td><button onclick="openInPlayground('console.log(\'Log-Eintrag!\');\nconsole.warn(\'Warnung!\');')">Im Playground testen</button></td>
+                            <td><button class="playground-btn" data-code="console.log('Log-Eintrag!');&#10;console.warn('Warnung!');">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>Math.random()</code></td>
                             <td>Erzeugt eine zufällige Zahl zwischen 0 und 1.</td>
-                            <td><button onclick="openInPlayground('let rnd = Math.random();\nconsole.log(\'Zufallszahl: \' + rnd);')">Im Playground testen</button></td>
+                            <td><button class="playground-btn" data-code="let rnd = Math.random();&#10;console.log('Zufallszahl: ' + rnd);">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>setTimeout()</code></td>
                             <td>Führt Code nach einer bestimmten Wartezeit (in MS) aus.</td>
-                            <td><button onclick="openInPlayground('console.log(\'Warte 2 Sekunden...\');\nsetTimeout(() => {\n  console.log(\'Zeit ist um!\');\n}, 2000);')">Im Playground testen</button></td>
+                            <td><button class="playground-btn" data-code="console.log('Warte 2 Sekunden...');&#10;setTimeout(() => {&#10;  console.log('Zeit ist um!');&#10;}, 2000);">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>Array.map()</code></td>
                             <td>Wendet eine Funktion auf alle Elemente eines Arrays an.</td>
-                            <td><button onclick="openInPlayground('const nummern = [1, 2, 3];\nconst verdoppelt = nummern.map(n => n * 2);\nconsole.log(verdoppelt);')">Im Playground testen</button></td>
+                            <td><button class="playground-btn" data-code="const nummern = [1, 2, 3];&#10;const verdoppelt = nummern.map(n => n * 2);&#10;console.log(verdoppelt);">Im Playground testen</button></td>
                         </tr>
                         <tr>
                             <td><code>document.getElementById()</code></td>
                             <td>Sucht ein HTML-Element anhand seiner ID.</td>
-                            <td><button onclick="openInPlayground('const el = document.getElementById(\'confetti-btn\');\nif(el) console.log(el.innerText);')">Im Playground testen</button></td>
+                            <td><button class="playground-btn" data-code="const el = document.getElementById('confetti-btn');&#10;if(el) console.log(el.innerText);">Im Playground testen</button></td>
                         </tr>
                     </tbody>
                 </table>
                 <div style="text-align: center; margin-top: 30px;">
-                    <a href="functions.html" class="cta-primary" style="font-size: 1.1rem;">Zu allen weiteren Funktionen</a>
+                    <a href="functions.html" class="cta-primary" style="font-size: 1.1rem;" data-no-popover>Zu allen weiteren Funktionen</a>
                 </div>
             </section>
 
@@ -109,7 +109,7 @@
                         <h3>JavaScript Full Course for free</h3>
                         <p>Ein umfassender Vollkurs für Einsteiger – von den Grundlagen bis zu fortgeschrittenen Konzepten wie DOM-Manipulation, Events und asynchronem JavaScript.</p>
                         <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/lfmg-EJ8gm4" title="JavaScript Full Course for free" allowfullscreen loading="lazy"></iframe>
+                            <iframe src="https://www.youtube-nocookie.com/embed/lfmg-EJ8gm4" title="JavaScript Full Course for free" allowfullscreen loading="lazy"></iframe>
                         </div>
                     </div>
                     <div class="tutorial-card">
@@ -120,7 +120,7 @@
                         <h3>JavaScript Tutorial – Kompletter Einsteigerkurs</h3>
                         <p>Deutschsprachiger Einsteigerkurs: Variablen, Datentypen, Funktionen, Schleifen und mehr – ideal für absolute Anfänger.</p>
                         <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/1y0X1s4csWI" title="JavaScript Tutorial - Kompletter Einsteigerkurs" allowfullscreen loading="lazy"></iframe>
+                            <iframe src="https://www.youtube-nocookie.com/embed/1y0X1s4csWI" title="JavaScript Tutorial - Kompletter Einsteigerkurs" allowfullscreen loading="lazy"></iframe>
                         </div>
                     </div>
                     <div class="tutorial-card">
@@ -131,7 +131,7 @@
                         <h3>Learn JavaScript in 60 Minutes</h3>
                         <p>Kompakter Schnellkurs für Einsteiger – alle wichtigen Konzepte in unter 90 Minuten, mit praktischen Beispielen.</p>
                         <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/voLJ3CmaM1s" title="Learn JavaScript in 60 Minutes" allowfullscreen loading="lazy"></iframe>
+                            <iframe src="https://www.youtube-nocookie.com/embed/voLJ3CmaM1s" title="Learn JavaScript in 60 Minutes" allowfullscreen loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>

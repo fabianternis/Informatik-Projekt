@@ -22,11 +22,14 @@ const tbody = document.getElementById('functions-tbody');
 if (tbody) {
     ALL_FUNCTIONS.forEach(fn => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td><code>${fn.title}</code></td>
-            <td>${fn.desc}</td>
-            <td><button onclick="openInPlayground(${JSON.stringify(fn.code)})">Im Playground testen</button></td>
-        `;
+        const btn = document.createElement('button');
+        btn.className = 'playground-btn';
+        btn.textContent = 'Im Playground testen';
+        btn.dataset.code = fn.code;
+        const td = document.createElement('td');
+        td.appendChild(btn);
+        tr.innerHTML = `<td><code>${fn.title}</code></td><td>${fn.desc}</td>`;
+        tr.appendChild(td);
         tbody.appendChild(tr);
     });
 }
@@ -48,6 +51,10 @@ window.addEventListener('DOMContentLoaded', () => {
     if (editor && codeParam) {
         editor.value = decodeURIComponent(codeParam);
     }
+
+    document.querySelectorAll('.playground-btn').forEach(btn => {
+        btn.addEventListener('click', () => openInPlayground(btn.dataset.code));
+    });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -256,6 +263,7 @@ document.addEventListener('click', (e) => {
     if (!anchor) return;
     const href = anchor.getAttribute('href');
     if (href && href.startsWith('#')) return;
+    if (anchor.hasAttribute('data-no-popover')) return;
     openLink(href, e);
 });
 
