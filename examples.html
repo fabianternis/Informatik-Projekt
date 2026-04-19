@@ -152,12 +152,11 @@
                     </div>
 
                     <div class="example-card" style="grid-column: 1 / -1;">
-                        <h3>Settings Debug</h3>
-                        <pre id="debug-output" class="debug-box"></pre>
-                    </div>
-
-                    <div class="example-card" style="grid-column: 1 / -1;">
                         <h3>Video Player</h3>
+                        <div class="list-input-row" style="margin-bottom:14px;">
+                            <input type="url" id="vid-url-input" placeholder="Video-URL eingeben..." value="https://www.pexels.com/de-de/download/video/35008769/">
+                            <button id="vid-url-btn">Laden</button>
+                        </div>
                         <div class="video-player-wrapper">
                             <video id="custom-video" src="https://www.pexels.com/de-de/download/video/35008769/" preload="metadata"></video>
                             <div class="video-controls">
@@ -167,6 +166,11 @@
                                 <button id="vid-mute-btn">Ton aus</button>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="example-card" style="grid-column: 1 / -1;">
+                        <h3>Settings Debug</h3>
+                        <pre id="debug-output" class="debug-box"></pre>
                     </div>
 
                 </div>

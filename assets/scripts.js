@@ -392,22 +392,47 @@ function fmtTime(s) {
     return `${m}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 }
 
-if (video && playBtn) {
-    playBtn.addEventListener('click', () => {
-        video.paused ? video.play() : video.pause();
-        playBtn.textContent = video.paused ? 'Abspielen' : 'Pause';
+function initVideoPlayer(vid, play, prog, time, mute) {
+    if (!vid || !play) return;
+    play.addEventListener('click', () => {
+        vid.paused ? vid.play() : vid.pause();
     });
-    video.addEventListener('play',  () => { playBtn.textContent = 'Pause'; });
-    video.addEventListener('pause', () => { playBtn.textContent = 'Abspielen'; });
-    video.addEventListener('timeupdate', () => {
-        if (!video.duration) return;
-        progress.max   = video.duration;
-        progress.value = video.currentTime;
-        timeLabel.textContent = `${fmtTime(video.currentTime)} / ${fmtTime(video.duration)}`;
+    vid.addEventListener('play',  () => { play.textContent = 'Pause'; });
+    vid.addEventListener('pause', () => { play.textContent = 'Abspielen'; });
+    vid.addEventListener('timeupdate', () => {
+        if (!vid.duration) return;
+        prog.max   = vid.duration;
+        prog.value = vid.currentTime;
+        time.textContent = `${fmtTime(vid.currentTime)} / ${fmtTime(vid.duration)}`;
     });
-    progress.addEventListener('input', () => { video.currentTime = progress.value; });
-    muteBtn.addEventListener('click', () => {
-        video.muted = !video.muted;
-        muteBtn.textContent = video.muted ? 'Ton an' : 'Ton aus';
+    prog.addEventListener('input', () => { vid.currentTime = prog.value; });
+    mute.addEventListener('click', () => {
+        vid.muted = !vid.muted;
+        mute.textContent = vid.muted ? 'Ton an' : 'Ton aus';
     });
 }
+
+initVideoPlayer(video, playBtn, progress, timeLabel, muteBtn);
+
+const vidUrlInput = document.getElementById('vid-url-input');
+const vidUrlBtn   = document.getElementById('vid-url-btn');
+if (vidUrlBtn && vidUrlInput && video) {
+    vidUrlBtn.addEventListener('click', () => {
+        const url = vidUrlInput.value.trim();
+        if (!url) return;
+        video.pause();
+        video.src = url;
+        video.load();
+        if (playBtn) playBtn.textContent = 'Abspielen';
+        if (progress) progress.value = 0;
+        if (timeLabel) timeLabel.textContent = '0:00 / 0:00';
+    });
+    vidUrlInput.addEventListener('keydown', e => { if (e.key === 'Enter') vidUrlBtn.click(); });
+}
+
+const previewVideo   = document.getElementById('preview-video');
+const previewPlay    = document.getElementById('preview-play-btn');
+const previewProg    = document.getElementById('preview-progress');
+const previewTime    = document.getElementById('preview-time');
+const previewMute    = document.getElementById('preview-mute-btn');
+initVideoPlayer(previewVideo, previewPlay, previewProg, previewTime, previewMute);
