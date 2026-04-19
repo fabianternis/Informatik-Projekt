@@ -109,7 +109,6 @@ body {
     user-select: none;
     opacity: 0.12;
     z-index: 1;
-    /* position is set via JS using top/left + transform-origin trick */
 }
 
 @keyframes orbitCW {
@@ -412,7 +411,6 @@ button:hover {
     display: none;
 }
 
-/* openLink popover shares settings popover styles */
 #open-link-popover {
     position: fixed;
     top: 50%;
@@ -441,7 +439,6 @@ button:hover {
     padding-bottom: 10px;
 }
 
-/* overlay backdrop */
 .popover-backdrop {
     position: fixed;
     inset: 0;
@@ -457,7 +454,6 @@ button:hover {
     visibility: visible;
 }
 
-/* reduce-motion support */
 body.reduce-motion *,
 body.reduce-motion *::before,
 body.reduce-motion *::after {
@@ -465,7 +461,6 @@ body.reduce-motion *::after {
     transition-duration: 0.001ms !important;
 }
 
-/* color inputs */
 input[type="color"] {
     border: 1px solid #555;
     border-radius: 4px;
@@ -478,7 +473,6 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
-/* ── SPA Views ───────────────────────────────────────────────────────────── */
 .page-view {
     animation: fadeIn 0.4s ease-out;
 }
@@ -492,7 +486,6 @@ input[type="number"] {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Shared section styles ───────────────────────────────────────────────── */
 section {
     padding: 80px 20px;
     max-width: 1100px;
@@ -518,7 +511,6 @@ section h2 {
     max-width: 700px;
 }
 
-/* ── Tutorials ───────────────────────────────────────────────────────────── */
 .tutorial-scroll {
     display: flex;
     gap: 24px;
@@ -633,7 +625,6 @@ section h2 {
     border-color: var(--js-yellow);
 }
 
-/* ── TypeScript section ──────────────────────────────────────────────────── */
 #typescript {
     max-width: 1000px;
 }
@@ -716,7 +707,6 @@ section h2 {
     font-size: 0.85rem;
 }
 
-/* ── Anderes / Ressourcen ────────────────────────────────────────────────── */
 #anderes { max-width: 1000px; }
 
 .resource-grid {
@@ -770,7 +760,6 @@ section h2 {
     .ts-intro { flex-direction: column; }
 }
 
-/* ── Playground Elements ─────────────────────────────────────────────────── */
 .playground-editor-wrapper {
     width: 100%;
     margin-top: 20px;

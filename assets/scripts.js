@@ -1,4 +1,3 @@
-// ── Functions data (previously server-rendered via PHP) ───────────────────────
 const ALL_FUNCTIONS = [
     { title: "String.prototype.toUpperCase()", desc: "Wandelt einen String in Großbuchstaben um.", code: "let str = 'hallo';\nconsole.log(str.toUpperCase());" },
     { title: "String.prototype.toLowerCase()", desc: "Wandelt einen String in Kleinbuchstaben um.", code: "let str = 'WELT';\nconsole.log(str.toLowerCase());" },
@@ -19,7 +18,6 @@ const ALL_FUNCTIONS = [
     { title: "fetch()", desc: "Lädt Daten von einer API/URL (Netzwerkanfrage).", code: "fetch('https://jsonplaceholder.typicode.com/todos/1')\n  .then(res => res.json())\n  .then(data => console.log(data));" },
 ];
 
-// ── Render functions table on functions.html ──────────────────────────────────
 const tbody = document.getElementById('functions-tbody');
 if (tbody) {
     ALL_FUNCTIONS.forEach(fn => {
@@ -33,12 +31,10 @@ if (tbody) {
     });
 }
 
-// ── Navigate to playground with pre-filled code ───────────────────────────────
 function openInPlayground(code) {
     window.location.href = 'playground.html?code=' + encodeURIComponent(code);
 }
 
-// ── Load code from URL param into playground editor ───────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
     if (window.location.hash) {
         setTimeout(() => {
@@ -54,7 +50,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ── Split interactivity text into animated spans ──────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.interactivity-text');
     if (container) {
@@ -70,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ── JS/TS logo swap on hover ──────────────────────────────────────────────────
 const jsLogo = document.querySelector('.js-logo-img');
 const tsLogo = document.querySelector('.ts-logo-img');
 if (jsLogo && tsLogo) {
@@ -78,7 +72,6 @@ if (jsLogo && tsLogo) {
     jsLogo.addEventListener('mouseleave', () => { jsLogo.style.display = 'inline'; tsLogo.style.display = 'none';   });
 }
 
-// ── Orbiting JS logos in hero section ────────────────────────────────────────
 const RINGS = [
     { count: 6,  radius: 140, size: 28, duration: 18, cw: true  },
     { count: 9,  radius: 230, size: 42, duration: 28, cw: false },
@@ -128,7 +121,6 @@ window.addEventListener('resize', () => {
     resizeTimer = setTimeout(createFloatingLogos, 150);
 });
 
-// ── Settings panel ────────────────────────────────────────────────────────────
 const DEFAULTS = {
     textFont:     "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     codeFont:     'monospace',
@@ -223,7 +215,6 @@ reduceMotionCb.addEventListener('change',  saveSettings);
 document.getElementById('reset-accent').addEventListener('click', () => { accentInput.value = DEFAULTS.accent; saveSettings(); });
 document.getElementById('reset-bg').addEventListener('click',     () => { bgInput.value     = DEFAULTS.bg;     saveSettings(); });
 
-// ── Open-link popover ─────────────────────────────────────────────────────────
 const openLinkPopover  = document.getElementById('open-link-popover');
 const openLinkUrlEl    = document.getElementById('open-link-url');
 const openLinkCountEl  = document.getElementById('open-link-count');
@@ -260,7 +251,6 @@ openLinkConfirm.addEventListener('click', () => {
 
 openLinkCancel.addEventListener('click', () => { _pendingHref = null; closeAllPopovers(); });
 
-// Intercept all anchor clicks except pure hash links
 document.addEventListener('click', (e) => {
     const anchor = e.target.closest('a[href]');
     if (!anchor) return;
@@ -269,7 +259,6 @@ document.addEventListener('click', (e) => {
     openLink(href, e);
 });
 
-// ── Confetti button ───────────────────────────────────────────────────────────
 const confettiBtn = document.getElementById('confetti-btn');
 if (confettiBtn) {
     confettiBtn.addEventListener('click', () => {
@@ -289,7 +278,6 @@ if (confettiBtn) {
     });
 }
 
-// ── Playground code runner ────────────────────────────────────────────────────
 const runBtn  = document.getElementById('run-code-btn');
 const playOut = document.getElementById('playground-out');
 
