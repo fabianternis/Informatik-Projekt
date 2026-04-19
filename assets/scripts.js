@@ -170,6 +170,19 @@ function closeAllPopovers() {
     backdrop.classList.remove('visible');
 }
 
+function updateRangeFill(input) {
+    const min = parseFloat(input.min) || 0;
+    const max = parseFloat(input.max) || 100;
+    const val = parseFloat(input.value) || 0;
+    const pct = ((val - min) / (max - min)) * 100;
+    input.style.setProperty('--range-fill', pct + '%');
+}
+
+document.querySelectorAll('input[type="range"]').forEach(r => {
+    updateRangeFill(r);
+    r.addEventListener('input', () => updateRangeFill(r));
+});
+
 function applySettings(s) {
     root.style.setProperty('--base-font', s.textFont);
     root.style.setProperty('--code-font', s.codeFont);
@@ -184,6 +197,7 @@ function applySettings(s) {
     document.body.classList.toggle('reduce-motion', s.reduceMotion);
     [...textFontSelect.options].forEach(o => { o.selected = o.value === s.textFont; });
     [...codeFontSelect.options].forEach(o => { o.selected = o.value === s.codeFont; });
+    updateRangeFill(fontSizeInput);
 }
 
 function saveSettings() {
@@ -404,6 +418,7 @@ function initVideoPlayer(vid, play, prog, time, mute) {
         prog.max   = vid.duration;
         prog.value = vid.currentTime;
         time.textContent = `${fmtTime(vid.currentTime)} / ${fmtTime(vid.duration)}`;
+        updateRangeFill(prog);
     });
     prog.addEventListener('input', () => { vid.currentTime = prog.value; });
     mute.addEventListener('click', () => {
