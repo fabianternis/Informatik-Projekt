@@ -350,14 +350,12 @@ function saveList(arr) {
 }
 
 function renderLists() {
-    const ol  = document.getElementById('numbered-list');
     const ul  = document.getElementById('unordered-list');
     const sol = document.getElementById('sorted-list');
-    if (!ol || !ul || !sol) return;
+    if (!ul || !sol) return;
 
     const items = loadList();
 
-    ol.innerHTML  = items.map(i => `<li>${i}</li>`).join('');
     ul.innerHTML  = items.map(i => `<li>${i}</li>`).join('');
     sol.innerHTML = [...items].sort((a, b) => a.localeCompare(b)).map(i => `<li>${i}</li>`).join('');
 }
@@ -444,10 +442,3 @@ if (vidUrlBtn && vidUrlInput && video) {
     });
     vidUrlInput.addEventListener('keydown', e => { if (e.key === 'Enter') vidUrlBtn.click(); });
 }
-
-const previewVideo   = document.getElementById('preview-video');
-const previewPlay    = document.getElementById('preview-play-btn');
-const previewProg    = document.getElementById('preview-progress');
-const previewTime    = document.getElementById('preview-time');
-const previewMute    = document.getElementById('preview-mute-btn');
-initVideoPlayer(previewVideo, previewPlay, previewProg, previewTime, previewMute);
