@@ -3,10 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funktionen – JavaScript</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Beispiele – JavaScript</title>
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="shortcut icon" href="assets/img/javascript-logo-svgrepo-com.svg" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        .examples-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .example-card {
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .example-card h3 {
+            color: var(--js-yellow);
+            margin: 0 0 14px;
+            font-size: 1rem;
+        }
+        .list-input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .list-input-row input {
+            flex: 1;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: white;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .list-input-row input:focus { outline: 1px solid var(--js-yellow); }
+        ol.js-list, ul.js-list {
+            margin: 0;
+            padding-left: 22px;
+            color: #ccc;
+            line-height: 1.9;
+        }
+        .debug-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 12px 14px;
+            font-family: var(--code-font);
+            font-size: 0.8rem;
+            color: #aaa;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .video-player-wrapper {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .video-player-wrapper video {
+            width: 100%;
+            display: block;
+        }
+        .video-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #111;
+        }
+        .video-controls button {
+            background: var(--js-yellow);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .video-controls button:hover { background: #e6ce1a; }
+        .video-progress {
+            flex: 1;
+            height: 4px;
+            accent-color: var(--js-yellow);
+            cursor: pointer;
+        }
+        .video-time {
+            font-size: 0.8rem;
+            color: #aaa;
+            white-space: nowrap;
+            font-family: var(--code-font);
+        }
+        @media (max-width: 700px) {
+            .examples-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -15,11 +111,11 @@
         </a>
         <div class="nav-links">
             <a href="index.html" data-no-popover>Home</a>
-            <a href="functions.html" class="active" data-no-popover>Funktionen</a>
+            <a href="functions.html" data-no-popover>Funktionen</a>
             <a href="index.html#tutorials">Tutorials</a>
             <a href="index.html#typescript">TypeScript</a>
             <a href="index.html#anderes">Anderes</a>
-            <a href="examples.html" data-no-popover>Beispiele</a>
+            <a href="examples.html" class="active" data-no-popover>Beispiele</a>
             <a href="playground.html" data-no-popover>Playground</a>
             <button id="settings-toggle" title="Einstellungen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -31,19 +127,49 @@
     </nav>
     <main id="app">
         <div class="page-view">
-            <section id="functions-extended">
-                <h2>Alle Funktionen</h2>
-                <p class="section-intro">Hier ist die komplette Liste an wichtigen JavaScript Funktionen.</p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Funktion / Methode</th>
-                            <th>Beschreibung</th>
-                            <th>Demo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="functions-tbody"></tbody>
-                </table>
+            <section id="examples">
+                <h2>Beispiele</h2>
+                <p class="section-intro">Interaktive JavaScript-Beispiele – Listen, Debug-Ausgabe und ein eigener Video-Player.</p>
+
+                <div class="examples-grid">
+
+                    <div class="example-card">
+                        <h3>Editierbare Liste (localStorage)</h3>
+                        <div class="list-input-row">
+                            <input type="text" id="list-input" placeholder="Eintrag hinzufügen...">
+                            <button id="list-add-btn">Hinzufügen</button>
+                            <button id="list-clear-btn" style="background:#333;color:#ccc;">Leeren</button>
+                        </div>
+                        <ol id="numbered-list" class="js-list"></ol>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Unsortierte Liste (gleicher Inhalt)</h3>
+                        <ul id="unordered-list" class="js-list"></ul>
+                        <hr style="border-color:#333;margin:14px 0;">
+                        <h3 style="margin-bottom:8px;">Sortierte Liste</h3>
+                        <ol id="sorted-list" class="js-list"></ol>
+                    </div>
+
+                    <div class="example-card" style="grid-column: 1 / -1;">
+                        <h3>Settings Debug</h3>
+                        <pre id="debug-output" class="debug-box"></pre>
+                    </div>
+
+                    <div class="example-card" style="grid-column: 1 / -1;">
+                        <h3>Video Player</h3>
+                        <div class="video-player-wrapper">
+                            <video id="custom-video" src="https://www.pexels.com/de-de/download/video/35008769/" preload="metadata"></video>
+                            <div class="video-controls">
+                                <button id="vid-play-btn">Abspielen</button>
+                                <input type="range" id="vid-progress" class="video-progress" value="0" min="0" step="0.1">
+                                <span id="vid-time" class="video-time">0:00 / 0:00</span>
+                                <button id="vid-mute-btn">Ton aus</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </section>
         </div>
 

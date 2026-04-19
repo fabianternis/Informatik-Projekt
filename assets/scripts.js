@@ -197,6 +197,7 @@ function saveSettings() {
     };
     localStorage.setItem('siteSettings', JSON.stringify(s));
     applySettings(s);
+    renderDebug();
 }
 
 function loadSettings() {
@@ -204,6 +205,7 @@ function loadSettings() {
         const saved = JSON.parse(localStorage.getItem('siteSettings'));
         applySettings(saved && typeof saved === 'object' ? { ...DEFAULTS, ...saved } : DEFAULTS);
     } catch { applySettings(DEFAULTS); }
+    renderDebug();
 }
 
 loadSettings();
@@ -319,5 +321,93 @@ if (runBtn && playOut) {
         console.log   = origLog;
         console.warn  = origWarn;
         console.error = origError;
+    });
+}
+
+const LS_LIST_KEY = 'examplesList';
+
+function loadList() {
+    try { return JSON.parse(localStorage.getItem(LS_LIST_KEY)) || ['Apfel', 'Banane', 'Kirsche']; }
+    catch { return ['Apfel', 'Banane', 'Kirsche']; }
+}
+
+function saveList(arr) {
+    localStorage.setItem(LS_LIST_KEY, JSON.stringify(arr));
+}
+
+function renderLists() {
+    const ol  = document.getElementById('numbered-list');
+    const ul  = document.getElementById('unordered-list');
+    const sol = document.getElementById('sorted-list');
+    if (!ol || !ul || !sol) return;
+
+    const items = loadList();
+
+    ol.innerHTML  = items.map(i => `<li>${i}</li>`).join('');
+    ul.innerHTML  = items.map(i => `<li>${i}</li>`).join('');
+    sol.innerHTML = [...items].sort((a, b) => a.localeCompare(b)).map(i => `<li>${i}</li>`).join('');
+}
+
+function renderDebug() {
+    const box = document.getElementById('debug-output');
+    if (!box) return;
+    try {
+        const saved = JSON.parse(localStorage.getItem('siteSettings'));
+        box.textContent = JSON.stringify(saved || {}, null, 2);
+    } catch { box.textContent = '{}'; }
+}
+
+const listAddBtn   = document.getElementById('list-add-btn');
+const listClearBtn = document.getElementById('list-clear-btn');
+const listInput    = document.getElementById('list-input');
+
+if (listAddBtn) {
+    listAddBtn.addEventListener('click', () => {
+        const val = listInput.value.trim();
+        if (!val) return;
+        const items = loadList();
+        items.push(val);
+        saveList(items);
+        listInput.value = '';
+        renderLists();
+    });
+    listInput.addEventListener('keydown', e => { if (e.key === 'Enter') listAddBtn.click(); });
+}
+
+if (listClearBtn) {
+    listClearBtn.addEventListener('click', () => { saveList([]); renderLists(); });
+}
+
+renderLists();
+renderDebug();
+
+const video      = document.getElementById('custom-video');
+const playBtn    = document.getElementById('vid-play-btn');
+const progress   = document.getElementById('vid-progress');
+const timeLabel  = document.getElementById('vid-time');
+const muteBtn    = document.getElementById('vid-mute-btn');
+
+function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    return `${m}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+}
+
+if (video && playBtn) {
+    playBtn.addEventListener('click', () => {
+        video.paused ? video.play() : video.pause();
+        playBtn.textContent = video.paused ? 'Abspielen' : 'Pause';
+    });
+    video.addEventListener('play',  () => { playBtn.textContent = 'Pause'; });
+    video.addEventListener('pause', () => { playBtn.textContent = 'Abspielen'; });
+    video.addEventListener('timeupdate', () => {
+        if (!video.duration) return;
+        progress.max   = video.duration;
+        progress.value = video.currentTime;
+        timeLabel.textContent = `${fmtTime(video.currentTime)} / ${fmtTime(video.duration)}`;
+    });
+    progress.addEventListener('input', () => { video.currentTime = progress.value; });
+    muteBtn.addEventListener('click', () => {
+        video.muted = !video.muted;
+        muteBtn.textContent = video.muted ? 'Ton an' : 'Ton aus';
     });
 }
